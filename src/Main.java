@@ -35,7 +35,6 @@ class Number extends ArithmeticExp {
         return value;
     }
 
-    // The toStringRepresentation method returns the string representation of the number
     public String toString() {
         return String.valueOf(value);
     }
@@ -53,9 +52,10 @@ class Sum extends BinaryExp {
         return left.evaluate() + right.evaluate();
     }
 
-    // The toStringRepresentation method returns the string representation of the sum expression
+
     public String toString() {
         return left.toString() + " + " + right.toString();
+        //method returns the string representation of the sum expression
     }
 }
 
@@ -71,7 +71,7 @@ class Product extends BinaryExp {
         return left.evaluate() * right.evaluate();
     }
 
-    // The toStringRepresentation method returns the string representation of the product expression
+
     public String toString() {
         return left.toString() + " * " + right.toString();
     }
@@ -83,7 +83,7 @@ class ArithmeticOperation {
         // Constructing the expression 3 + 2 * 5 using the new classes
         ArithmeticExp result = new Sum(new Number(3), new Product(new Number(2), new Number(5)));
 
-        
+
 
         System.out.println("Arithmetic Expression : " + result.toString());
         System.out.println("Output: " + result.evaluate());
