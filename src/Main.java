@@ -1,16 +1,10 @@
-//The initial program violates object-oriented principles,
-//particularly polymorphism, by using a single class (ArithmeticExp) for
-//different expressions and resorting to a switch statement for evaluation.
-//A more effective approach employs inheritance, utilizing abstract classes to
-//create a hierarchy of expression classes. Each subclass, implementing its unique
-//evaluate method,adheres to the common interface provided by the abstract
-//class, promoting modularity, extensibility, and maintainability in the code.
-
-// Defining  ArithmeticExp as  an abstract class
+// Defining ArithmeticExp as an abstract class that declares an evaluate abstract method.
 abstract class ArithmeticExp {
-
-   // returns the value of the expression
+    // The evaluate method returns the value of the expression
     public abstract int evaluate();
+
+    // New method to generate the string representation of the expression
+    public abstract String toString();
 }
 
 // Abstract class for binary expressions (Sum and Product)
@@ -26,8 +20,6 @@ abstract class BinaryExp extends ArithmeticExp {
     }
 }
 
-
-
 // A Number class represents a single integer value
 class Number extends ArithmeticExp {
     // A private field to store the value
@@ -42,6 +34,11 @@ class Number extends ArithmeticExp {
     public int evaluate() {
         return value;
     }
+
+    // The toStringRepresentation method returns the string representation of the number
+    public String toString() {
+        return String.valueOf(value);
+    }
 }
 
 // A Sum class represents an addition of two expressions
@@ -54,6 +51,11 @@ class Sum extends BinaryExp {
     // The evaluate method returns the sum of the values of the left and right operands
     public int evaluate() {
         return left.evaluate() + right.evaluate();
+    }
+
+    // The toStringRepresentation method returns the string representation of the sum expression
+    public String toString() {
+        return left.toString() + " + " + right.toString();
     }
 }
 
@@ -68,6 +70,11 @@ class Product extends BinaryExp {
     public int evaluate() {
         return left.evaluate() * right.evaluate();
     }
+
+    // The toStringRepresentation method returns the string representation of the product expression
+    public String toString() {
+        return left.toString() + " * " + right.toString();
+    }
 }
 
 // The main class
@@ -75,7 +82,10 @@ class ArithmeticOperation {
     public static void main(String[] args) {
         // Constructing the expression 3 + 2 * 5 using the new classes
         ArithmeticExp result = new Sum(new Number(3), new Product(new Number(2), new Number(5)));
-        // Printing the value of the expression
-        System.out.println("Result of the Expression : "+result.evaluate());
+
+        
+
+        System.out.println("Arithmetic Expression : " + result.toString());
+        System.out.println("Output: " + result.evaluate());
     }
 }
